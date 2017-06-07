@@ -44,6 +44,29 @@ share [mkPersist sqlSettings, mkMigrate "migrateAll"][persistLowerCase|
         aluno_nota    Double
         aluno_faltas    Int
         usuariosid    UsuariosId
+    
+    Escola json
+        esc_nm    Text
+    
+    Disciplina  json
+        di_nm   Text
+    
+    Classe json
+        classe_nm   Text
+        professoresid   ProfessoresId
+        escolaid    EscolaId
+        disciplinaid    DisciplinaId
+        
+    Relacao json
+        classeid    ClasseId
+        alunosid    AlunosId
+        
+    --Publi json
+    --    publi_titulo Text
+    --    publi_cont Text
+    --    publi_data Day
+    --    professoresid ProfessoresId
+    --    classeid ClasseId
   
 |]
 
