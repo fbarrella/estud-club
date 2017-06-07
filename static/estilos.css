@@ -1,0 +1,10 @@
+body{
+    backgorund-image: linear-gradient(to bottom, gray, lightgray);
+}
+
+h1{
+    color: red;
+    font-family: Arial;
+    font-size: 25px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
