@@ -19,3 +19,5 @@ cabal.sandbox.config
 *~
 \#*
 estud-club.cabal
+Database_configs
+psql
