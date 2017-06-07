@@ -7,7 +7,7 @@ import Yesod.Core
 
 getHomeR :: Handler Html
 getHomeR = defaultLayout $ do
-    setTitle "Minimal Multifile"
+    setTitle "Página teste"
     [whamlet|
         <h1>
             Título
