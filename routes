@@ -1,1 +1,5 @@
-/              HomeR GET
+/                           HomeR           GET
+
+/novaclasse                 ClasseR         GET POST
+/classe/#ClasseId           ExibeR          GET
+/manage/#ClasseId           ManageR         GET POST
