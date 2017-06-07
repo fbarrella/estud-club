@@ -28,6 +28,25 @@ data App = App
         connPool       :: ConnectionPool
     }
 
+share [mkPersist sqlSettings, mkMigrate "migrateAll"][persistLowerCase|
+    Usuarios json
+        user_name     Text
+        user_pass     Text
+        UniqueUSER_NAME user_name
+        UniqueUSER_PASS user_pass
+    
+    Professores json
+        prof_nm    Text
+        usuariosid  UsuariosId
+        
+    Alunos json
+        aluno_nm    Text
+        aluno_nota    Double
+        aluno_faltas    Int
+        usuariosid    UsuariosId
+  
+|]
+
 mkYesodData "App" $(parseRoutesFile "routes")
 
 instance Yesod App
