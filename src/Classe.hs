@@ -10,17 +10,17 @@ import Data.Text
 
 import Database.Persist.Postgresql
 
-getExibeR :: Handler Html
-getExibeR = defaultLayout $ do [whamlet| |]
+--getExibeR :: Handler Html
+--getExibeR = redirect HomeR
     
-getManageR :: Handler Html
-getManageR = defaultLayout $ do [whamlet| |]
+--getManageR :: Handler Html
+--getManageR = redirect HomeR
 
-postManageR :: Handler Html
-postManageR = defaultLayout $ do [whamlet| |]
+--postManageR :: Handler Html
+--postManageR = redirect HomeR
 
-getClasseR :: Handler Html
-getClasseR = defaultLayout $ do [whamlet| |]
+--getClasseR :: Handler Html
+--getClasseR = redirect HomeR
 
-postClasseR :: Handler Html
-postClasseR = defaultLayout $ do [whamlet| |]
+--postClasseR :: Handler Html
+--postClasseR = redirect HomeR

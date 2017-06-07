@@ -10,5 +10,6 @@ import Yesod.Core
 import Yesod
 
 import Home
+import Classe
 
 mkYesodDispatch "App" resourcesApp
