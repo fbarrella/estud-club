@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings, QuasiQuotes,
              TemplateHaskell #-}
  
-module Classe where
+module Usuario where
 import Yesod
 import Foundation
 import Control.Monad.Logger (runStdoutLoggingT)

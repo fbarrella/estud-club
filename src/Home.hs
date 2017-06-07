@@ -7,8 +7,8 @@ import Yesod.Core
 
 getHomeR :: Handler Html
 getHomeR = defaultLayout $ do
-    addStylesheet (StaticR teste_css)
     setTitle "Página teste"
+    addStylesheet $ StaticR estilos_css
     [whamlet|
         <h1>
             Título

@@ -11,5 +11,6 @@ import Yesod
 
 import Home
 import Classe
+import Usuario
 
 mkYesodDispatch "App" resourcesApp
