@@ -1,9 +1,21 @@
 name:    estud-club
-version: "0.0.0"
+version: "0.0.1"
 
 dependencies:
 - base
+- yesod
 - yesod-core
+- yesod-static
+- yesod-auth
+- yesod-form
+- persistent
+- persistent-postgresql
+- monad-logger
+- shakespeare
+- bytestring
+- http-types
+- time
+- text
 
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.
