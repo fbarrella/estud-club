@@ -70,6 +70,8 @@ share [mkPersist sqlSettings, mkMigrate "migrateAll"][persistLowerCase|
   
 |]
 
+staticFiles "static"
+
 mkYesodData "App" $(parseRoutesFile "routes")
 
 instance Yesod App
