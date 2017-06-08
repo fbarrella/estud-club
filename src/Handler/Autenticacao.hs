@@ -23,14 +23,14 @@ import Database.Persist.Sql
 
 formCadastro :: Form Usuarios
 formCadastro = renderDivs $ Usuarios <$>
-                 areq textField "E-mail" Nothing <*>
-                 areq passwordField "Senha" Nothing   
+                 areq textField "Your user: " Nothing <*>
+                 areq passwordField "Your pass: " Nothing   
 
 
 formLogin :: Form (Text,Text)
 formLogin = renderDivs $ (,) <$>
-             areq textField "Usuário: " Nothing <*>
-             areq passwordField "Senha: " Nothing 
+             areq textField "User: " Nothing <*>
+             areq passwordField "Pass: " Nothing 
   
 
 --getCadastraR :: Handler Html
@@ -41,15 +41,10 @@ formLogin = renderDivs $ (,) <$>
 getCadastraR :: Handler Html
 getCadastraR = do
     (widget, enctype) <- generateFormPost formCadastro
-    defaultLayout $ [whamlet|
-            <p>
-                The widget generated contains only the contents
-                of the form, not the form tag itself. So...
-            <form method=post action=@{CadastraR}>
-                ^{widget}
-                <p>It also doesn't include the submit button.
-                <button>Pau no seu cu
-        |]
+    defaultLayout $ do
+        setTitle "estud.club | A plataforma de aprendizado"
+        addStylesheet $ StaticR estilos_css
+        $(whamletFile "templates/cadastro.hamlet")
 
 
 postCadastraR :: Handler Html

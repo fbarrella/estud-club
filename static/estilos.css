@@ -10,7 +10,7 @@ body{
 
 .loginForm{
     padding: 15px;
-    margin: 16% 40%;
+    margin: 16% 38%;
     border-radius: 4px;
     background-color: rgba(226,224,226,1);
     box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
@@ -30,8 +30,21 @@ body{
     text-align: left;
 }
 
+.loginForm a{
+    margin-right: 25px;
+    font-size: 15px;
+    font-family: Arciform;
+    text-decoration: none;
+    color: #6c5af2;
+    transition: 0.1s;
+}
+
+.loginForm a:hover{
+    color: #2811d4;
+}
+
 .loginForm .btn{
-    background-color: #1d0c95; /* Green */
+    background-color: #1d0c95; /* Purple */
     border: none;
     border-radius: 4px;
     color: white;
@@ -45,5 +58,58 @@ body{
 }
 
 .loginForm .btn:hover{
+    background-color: #5742f0;
+}
+
+.titulasso{
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 12px;
+    margin: 1em 60% 1em 30px;
+    text-align: left;
+    font-family: Arciform;
+    font-size: 50px;
+    color: #1d0c95;
+    border-left: 5px solid white;
+    background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0));
+}
+
+.cadastroForm{
+    padding: 15px;
+    margin-top: 2em;
+    margin-left: 30px;
+    margin-right: 60%;
+    border-radius: 4px;
+    background-color: rgba(226,224,226,1);
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
+}
+
+.cadastroForm h2{
+    font-family: Arciform;
+    font-size: 30px;
+    color: #1d0c95;
+    padding: 0;
+    margin: 0.3em auto 1em auto;
+    text-align: center;
+}
+
+.cadastroForm .btn{
+    margin-top: 2em;
+    margin-bottom: 1em;
+    background-color: #1d0c95; /* Purple */
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 9px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cadastroForm .btn:hover{
     background-color: #5742f0;
 }

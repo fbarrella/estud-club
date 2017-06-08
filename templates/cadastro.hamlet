@@ -1,0 +1,5 @@
+<h1 .titulasso>estud.club
+<form .cadastroForm method=post action=@{CadastraR} enctype=#{enctype}>
+    <h2>Cadastro
+    ^{widget}
+    <input .btn type="submit" value="Cadastrar">

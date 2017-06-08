@@ -2,4 +2,5 @@
     <h1>estud.club
     <p .upperleft>
         ^{widget}
+    <a href=@{CadastraR}>Quero me cadastrar!
     <input .btn type="submit" value="Entrar">
