@@ -2,4 +2,5 @@
 <form .cadastroForm method=post action=@{CadastraR} enctype=#{enctype}>
     <h2>Cadastro
     ^{widget}
+    <a class="btn espa" href=@{LogarR}>Voltar
     <input .btn type="submit" value="Cadastrar">

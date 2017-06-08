@@ -42,7 +42,7 @@ getCadastraR :: Handler Html
 getCadastraR = do
     (widget, enctype) <- generateFormPost formCadastro
     defaultLayout $ do
-        setTitle "estud.club | A plataforma de aprendizado"
+        setTitle "estud.club | A plataforma do saber"
         addStylesheet $ StaticR estilos_css
         $(whamletFile "templates/cadastro.hamlet")
 
@@ -65,7 +65,7 @@ getLogarR :: Handler Html
 getLogarR = do
     (widget, enctype) <- generateFormPost formLogin
     defaultLayout $ do
-        setTitle "estud.club | A plataforma de aprendizado"
+        setTitle "estud.club | A plataforma do saber"
         addStylesheet $ StaticR estilos_css
         $(whamletFile "templates/login.hamlet")
 
