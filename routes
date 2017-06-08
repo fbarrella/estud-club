@@ -3,7 +3,8 @@
 
 /login                      LogarR GET POST
 /logout                     DeslogarR POST 
-/cadastrar                  CadastraR GET POST
+/cadastrarp                  CadastraPR GET POST
+/cadastrara                  CadastraAR GET POST
 
 
 /professor                  ProfessorR GET
