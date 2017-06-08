@@ -1,2 +1,5 @@
 /                           HomeR           GET
 /static                     StaticR         Static getStatic
+
+/login                      LogarR GET POST
+/logout                     DeslogarR GET POST 

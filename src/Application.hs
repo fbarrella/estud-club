@@ -13,4 +13,7 @@ import Home
 import Classe
 import Usuario
 
+
+import Handler.Autenticacao
+
 mkYesodDispatch "App" resourcesApp
