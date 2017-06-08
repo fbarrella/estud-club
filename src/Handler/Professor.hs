@@ -17,8 +17,8 @@ import Yesod
 import Yesod.Core
 import Foundation
 import Data.Text
-
-
+import Data.Int
+import Database.Persist.Sql
 
 getProfessorR :: Handler Html
 getProfessorR = defaultLayout [whamlet|
@@ -28,42 +28,3 @@ getProfessorR = defaultLayout [whamlet|
         <form method=post action=@{DeslogarR}>
             <input type=submit>
     |]
-
-
-{-
-
-formLogin :: Form (Text,Text)
-formLogin = renderDivs $ (,) <$>
-             areq textField "login" Nothing <*>
-             areq textField "senha" Nothing 
-  
-
-getLogarR :: Handler Html
-getLogarR = do
-    (widget, enctype) <- generateFormPost formLogin
-    defaultLayout $ widgetForm LogarR enctype widget "Login" 
-
-   
-postLogarR :: Handler Html
-postLogarR = do
-    ((result, _), _) <- runFormPost formLogin
-    case result of
-        FormSuccess (nome,senha) -> do
-            mUsuario <- runDB $ getBy $ UniqueUsuario nome senha
-            case mUsuario of
-                Nothing -> do
-                    setMessage "Erro! Usuário não existe"
-                    redirect LogarR
-                Just (Entity uid usuario ) -> do
-                    setMessage "Autenticado"
-                    redirect LogarR
-        _ -> redirect LogarR
-
-
-
-getDeslogarR :: Handler Html
-getDeslogarR = undefined
-
-postDeslogarR :: Handler Html
-postDeslogarR = undefined
--}

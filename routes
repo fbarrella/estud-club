@@ -7,8 +7,5 @@
 
 
 /professor                  ProfessorR GET
-
-
-/getRelacaoR/#RelacaoId     RelacaoR GET
-/alunoTeste                 AlunoTesteR GET
-/alunoTeste2                AlunoTeste2R GET
+/relacao/#RelacaoId         RelacaoR GET
+/classe                     ClasseR GET

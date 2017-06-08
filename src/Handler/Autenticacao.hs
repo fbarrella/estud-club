@@ -64,7 +64,7 @@ getLogarR = do
         addStylesheet $ StaticR estilos_css
         $(whamletFile "templates/login.hamlet")
         toWidget [lucius|
-            input { background-color: #ecc; border:none;}
+            input { background-color: white; border:none; padding:0; margin:0; height: 20px;}
         |]
 
    
@@ -79,9 +79,7 @@ postLogarR = do
                     setMessage "Erro! Usuário não existe"
                     redirect LogarR
                 Just (Entity uid usuario ) -> do
-                    deleteSession "_USER"
-                    deleteSession "_ID"
-                    -- setMessage "Autenticado"
+                    --setMessage "Autenticado"
                     alunoOuProfessor <- runDB $ selectFirst [ProfessoresUsuariosid ==. uid ] []
                     case alunoOuProfessor of
                         Nothing -> do

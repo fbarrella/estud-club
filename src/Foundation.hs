@@ -84,7 +84,6 @@ instance Yesod App where
     
     isAuthorized ProfessorR _ = ehProfessor
     
-
     isAuthorized AlunoR _ = ehAluno
 
     isAuthorized _ _ = return Authorized
@@ -104,7 +103,7 @@ ehProfessor = do
     return $ case mu of
         Nothing -> AuthenticationRequired
         Just "PROFESSOR" -> Authorized
-        Just _ -> Unauthorized "Soh o Professor acessa aqui!"
+        Just _ -> Unauthorized "<h1>Acesso não permitido!</h1>"
         
 
 ehAluno = do
