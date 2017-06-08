@@ -33,16 +33,19 @@ share [mkPersist sqlSettings, mkMigrate "migrateAll"][persistLowerCase|
         user_name     Text
         user_pass     Text
         UniqueUsuario user_name user_pass
+        deriving Show
     
     Professores json
         prof_nm    Text
         usuariosid  UsuariosId
+        deriving Show
         
     Alunos json
         aluno_nm    Text
         aluno_nota    Double
         aluno_faltas    Int
         usuariosid    UsuariosId
+        deriving Show
     
     Escola json
         esc_nm    Text
@@ -55,6 +58,7 @@ share [mkPersist sqlSettings, mkMigrate "migrateAll"][persistLowerCase|
         professoresid   ProfessoresId
         escolaid    EscolaId
         disciplinaid    DisciplinaId
+        deriving Show
         
     Relacao json
         classeid    ClasseId
@@ -107,7 +111,7 @@ ehAluno = do
     return $ case mu of
         Nothing -> AuthenticationRequired
         Just "ALUNO" -> Authorized
-        Just _ -> Unauthorized "Soh o Aluno acessa aqui!"
+        --Just _ -> Unauthorized "Soh o Aluno acessa aqui!"
 
 
 type Form a = Html -> MForm Handler (FormResult a, Widget)
@@ -117,7 +121,3 @@ instance RenderMessage App FormMessage where
 
 widgetForm :: Route App -> Enctype -> Widget -> Text -> Widget
 widgetForm x enctype widget y = $(whamletFile "templates/form.hamlet")
-
-
-
-

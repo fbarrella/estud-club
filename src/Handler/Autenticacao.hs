@@ -17,7 +17,7 @@ import Yesod
 import Yesod.Core
 import Foundation
 import Data.Text
-
+import Database.Persist.Sql
 
 
 
@@ -48,9 +48,13 @@ postLogarR = do
                     alunoOuProfessor <- runDB $ selectFirst [ProfessoresUsuariosid ==. uid ] []
                     case alunoOuProfessor of
                         Nothing -> do
+                            setSession "_USER" "ALUNO"
+                            setSession "_ID" (pack $ show $ fromSqlKey uid)
                             setMessage "Aluno Autenticado"
                             redirect AlunoR 
                         Just (Entity pid professor ) -> do
+                            setSession "_USER" "PROFESSOR"
+                            setSession "_ID" (pack $ show $ fromSqlKey pid)
                             setMessage "Professor Autenticado"
                             redirect ProfessorR
         _ -> redirect LogarR
@@ -60,4 +64,5 @@ postLogarR = do
 postDeslogarR :: Handler Html
 postDeslogarR = do
     deleteSession "_USER"
+    deleteSession "_ID"
     redirect LogarR

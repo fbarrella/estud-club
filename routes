@@ -9,3 +9,5 @@
 
 
 /aluno                      AlunoR GET
+/alunoTeste                 AlunoTesteR GET
+/alunoTeste2                AlunoTeste2R GET
