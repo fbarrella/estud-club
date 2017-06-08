@@ -1,0 +1,5 @@
+<form .loginForm method=post action=@{LogarR} enctype=#{enctype}>
+    <h1>estud.club
+    <p .upperleft>
+        ^{widget}
+    <input .btn type="submit" value="Entrar">

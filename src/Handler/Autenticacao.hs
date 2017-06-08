@@ -21,16 +21,58 @@ import Database.Persist.Sql
 
 
 
+formCadastro :: Form Usuarios
+formCadastro = renderDivs $ Usuarios <$>
+                 areq textField "E-mail" Nothing <*>
+                 areq passwordField "Senha" Nothing   
+
+
 formLogin :: Form (Text,Text)
 formLogin = renderDivs $ (,) <$>
-             areq textField "login" Nothing <*>
-             areq textField "senha" Nothing 
+             areq textField "Usuário: " Nothing <*>
+             areq passwordField "Senha: " Nothing 
   
+
+--getCadastraR :: Handler Html
+--getCadastraR = do
+--    (widget, enctype) <- generateFormPost formCadastro
+--    defaultLayout $ widgetForm CadastraR enctype widget "Cadastro" 
+    
+getCadastraR :: Handler Html
+getCadastraR = do
+    (widget, enctype) <- generateFormPost formCadastro
+    defaultLayout $ [whamlet|
+            <p>
+                The widget generated contains only the contents
+                of the form, not the form tag itself. So...
+            <form method=post action=@{CadastraR}>
+                ^{widget}
+                <p>It also doesn't include the submit button.
+                <button>Pau no seu cu
+        |]
+
+
+postCadastraR :: Handler Html
+postCadastraR = do
+                ((result, _), _) <- runFormPost formCadastro
+                case result of
+                    FormSuccess cadastro -> do
+                       cadastroLR <- runDB $ insertBy cadastro
+                       case cadastroLR of
+                           Left _ -> redirect CadastraR
+                           Right _ -> defaultLayout [whamlet|
+                                          <h1> #{usuariosUser_name cadastro} Inserido com sucesso. 
+                                      |]
+                    _ -> redirect CadastraR
+
 
 getLogarR :: Handler Html
 getLogarR = do
     (widget, enctype) <- generateFormPost formLogin
-    defaultLayout $ widgetForm LogarR enctype widget "Login" 
+    defaultLayout $ do
+        setTitle "estud.club | A plataforma de aprendizado"
+        addStylesheet $ StaticR estilos_css
+        $(whamletFile "templates/login.hamlet")
 
    
 postLogarR :: Handler Html
@@ -58,7 +100,6 @@ postLogarR = do
                             setMessage "Professor Autenticado"
                             redirect ProfessorR
         _ -> redirect LogarR
-
 
 
 postDeslogarR :: Handler Html

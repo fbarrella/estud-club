@@ -63,6 +63,7 @@ share [mkPersist sqlSettings, mkMigrate "migrateAll"][persistLowerCase|
     Relacao json
         classeid    ClasseId
         alunosid    AlunosId
+        deriving Show
         
     --Publi json
     --    publi_titulo Text

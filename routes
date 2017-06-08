@@ -1,13 +1,13 @@
-/                           HomeR           GET
+/                           AlunoR           GET
 /static                     StaticR         Static getStatic
 
 /login                      LogarR GET POST
 /logout                     DeslogarR POST 
+/cadastrar                  CadastraR GET POST
 
 
 /professor                  ProfessorR GET 
 
 
-/aluno                      AlunoR GET
 /alunoTeste                 AlunoTesteR GET
 /alunoTeste2                AlunoTeste2R GET
