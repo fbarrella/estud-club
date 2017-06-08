@@ -9,13 +9,9 @@ import Foundation
 import Yesod.Core
 import Yesod
 
-import Home
-import Classe
-import Usuario
-
-
 import Handler.Autenticacao
 import Handler.Professor
 import Handler.Aluno
+import Handler.Classe
 
 mkYesodDispatch "App" resourcesApp

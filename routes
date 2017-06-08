@@ -1,4 +1,4 @@
-/                           AlunoR           GET
+/                           AlunoR          GET
 /static                     StaticR         Static getStatic
 
 /login                      LogarR GET POST
@@ -6,8 +6,9 @@
 /cadastrar                  CadastraR GET POST
 
 
-/professor                  ProfessorR GET 
+/professor                  ProfessorR GET
 
 
+/getRelacaoR/#RelacaoId     RelacaoR GET
 /alunoTeste                 AlunoTesteR GET
 /alunoTeste2                AlunoTeste2R GET

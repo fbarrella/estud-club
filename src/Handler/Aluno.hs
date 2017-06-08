@@ -21,15 +21,36 @@ import Data.Int
 import Database.Persist.Sql
 
 
-getAlunoR :: Handler Html
-getAlunoR = defaultLayout [whamlet|
-        <h1>
-            Pagina inicial do aluno
-        Deslogar
-            <form method=post action=@{DeslogarR} >
-                <input type=submit>
-    |]
+--getAlunoR :: Handler Html
+--getAlunoR = do
+--        alunos <- runDB $ get404 (toSqlKey (read $ unpack userIdText) :: AlunosId)
+--        defaultLayout [whamlet|
+--        <h1>
+--            Seja bem vindo, #{alunosAluno_nm alunos}!
+--            
+--            Você tem #{alunosAluno_nota alunos} e #{alunosAluno_faltas alunos} faltas.
+--        Deslogar
+--            <form method=post action=@{DeslogarR} >
+--                <input type=submit>
+--    |]
 
+getAlunoR :: Handler Html
+getAlunoR = do
+    maybeUserIdText <- lookupSession "_ID"
+    case maybeUserIdText of
+        Nothing -> do
+            defaultLayout [whamlet| Sem sessão|]
+        Just userIdText -> do
+            alunos <- runDB $ get404 (toSqlKey (read $ unpack userIdText) :: AlunosId)
+            defaultLayout [whamlet|
+               <h1>
+                   Seja bem vindo, #{alunosAluno_nm alunos}!
+            
+               Você tem #{alunosAluno_nota alunos} e #{alunosAluno_faltas alunos} faltas.
+
+               <form method=post action=@{DeslogarR}>
+               <input type=submit value="Deslogar">
+        |]
 
 
 getAlunoTesteR :: Handler Html
@@ -58,13 +79,19 @@ getAlunoTeste2R = do
         Nothing -> do
             defaultLayout [whamlet| Sem sessão|]
         Just userIdText -> do
-            classe <- runDB $ get404 (toSqlKey (read $ unpack userIdText) :: ClasseId  )
+            classe <- runDB $ get404 (toSqlKey (read $ unpack userIdText) :: ClasseId)
             defaultLayout [whamlet| 
                 id da sessao sem conversão:
                 <p>
                     #{userIdText}
                 dados do usuário vindo do banco de dados. Usando o ID extraido da sessão:
                 <pre>
-                    #{show classe}
-                
             |]
+            
+getRelacaoR :: RelacaoId -> Handler Html
+getRelacaoR rid = do
+             relacao <- runDB $ get404 rid 
+             alunos <- runDB $ get404 (relacaoAlunosid relacao)
+             defaultLayout [whamlet| 
+                 #{alunosAluno_nm alunos}
+             |]

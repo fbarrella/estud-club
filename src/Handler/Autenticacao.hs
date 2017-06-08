@@ -31,12 +31,7 @@ formLogin :: Form (Text,Text)
 formLogin = renderDivs $ (,) <$>
              areq textField "User: " Nothing <*>
              areq passwordField "Pass: " Nothing 
-  
 
---getCadastraR :: Handler Html
---getCadastraR = do
---    (widget, enctype) <- generateFormPost formCadastro
---    defaultLayout $ widgetForm CadastraR enctype widget "Cadastro" 
     
 getCadastraR :: Handler Html
 getCadastraR = do
@@ -68,6 +63,9 @@ getLogarR = do
         setTitle "estud.club | A plataforma do saber"
         addStylesheet $ StaticR estilos_css
         $(whamletFile "templates/login.hamlet")
+        toWidget [lucius|
+            input { background-color: #ecc; border:none;}
+        |]
 
    
 postLogarR :: Handler Html
@@ -81,18 +79,18 @@ postLogarR = do
                     setMessage "Erro! Usuário não existe"
                     redirect LogarR
                 Just (Entity uid usuario ) -> do
+                    deleteSession "_USER"
+                    deleteSession "_ID"
                     -- setMessage "Autenticado"
                     alunoOuProfessor <- runDB $ selectFirst [ProfessoresUsuariosid ==. uid ] []
                     case alunoOuProfessor of
                         Nothing -> do
                             setSession "_USER" "ALUNO"
                             setSession "_ID" (pack $ show $ fromSqlKey uid)
-                            setMessage "Aluno Autenticado"
                             redirect AlunoR 
                         Just (Entity pid professor ) -> do
                             setSession "_USER" "PROFESSOR"
                             setSession "_ID" (pack $ show $ fromSqlKey pid)
-                            setMessage "Professor Autenticado"
                             redirect ProfessorR
         _ -> redirect LogarR
 
