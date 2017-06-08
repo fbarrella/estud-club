@@ -23,8 +23,10 @@ import Database.Persist.Sql
 getProfessorR :: Handler Html
 getProfessorR = defaultLayout [whamlet|
         <h1>
-            Professor
-        Deslogar:
+            Seja Bem-Vindo Professor.
+            
+            Verificar sua classe: <a href=@{ClasseR}>aqui
+            
         <form method=post action=@{DeslogarR}>
-            <input type=submit>
+            <input type=submit value="Deslogar">
     |]

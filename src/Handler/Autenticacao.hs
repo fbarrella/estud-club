@@ -66,32 +66,7 @@ getLogarR = do
         toWidget [lucius|
             input { background-color: white; border:none; padding:0; margin:0; height: 20px;}
         |]
-
-{-*
-
-postLogarR :: Handler Html
-postLogarR = do
-    ((result, _), _) <- runFormPost formLogin
-    case result of
-        FormSuccess (nome,senha) -> do
-            mUsuario <- runDB $ getBy $ UniqueUsuario nome senha
-            case mUsuario of
-                Nothing -> do
-                    setMessage "Erro! Usuário não existe"
-                    redirect LogarR
-                Just (Entity uid usuario ) -> do
-                    --setMessage "Autenticado"
-                    alunoOuProfessor <- runDB $ selectFirst [ProfessoresUsuariosid ==. uid ] []
-                    case alunoOuProfessor of
-                        Nothing -> do
-                            setSession "_USER" "ALUNO"
-                            setSession "_ID" (pack $ show $ fromSqlKey uid)
-                            redirect AlunoR 
-                        Just (Entity pid professor ) -> do
-                            setSession "_USER" "PROFESSOR"
-                            setSession "_ID" (pack $ show $ fromSqlKey pid)
-                            redirect ProfessorR
-        _ -> redirect LogarR *-}
+        
         
 postLogarR :: Handler Html
 postLogarR = do

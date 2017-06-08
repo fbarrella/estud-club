@@ -96,7 +96,6 @@ instance YesodPersist App where
        master <- getYesod
        let pool = connPool master
        runSqlPool f pool
-       
       
       
 ehProfessor = do

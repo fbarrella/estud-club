@@ -10,15 +10,6 @@ import Data.Text
 import Data.Int
 import Database.Persist.Postgresql
 
-getExibeR :: Handler Html
-getExibeR = undefined
-    
-getManageR :: Handler Html
-getManageR = undefined
-
-postManageR :: Handler Html
-postManageR = undefined
-
 getClasseR :: Handler Html
 getClasseR = do
     maybeUserIdText <- lookupSession "_ID"
@@ -28,7 +19,7 @@ getClasseR = do
         Just userIdText -> do
             classe <- runDB $ get404 (toSqlKey (read $ unpack userIdText) :: ClasseId)
             defaultLayout [whamlet| 
-                id da sessao sem conversão:
+                    Sua classe:
                 <p>
             |]
 
@@ -36,6 +27,6 @@ getRelacaoR :: RelacaoId -> Handler Html
 getRelacaoR rid = do
              relacao <- runDB $ get404 rid 
              alunos <- runDB $ get404 (relacaoAlunosid relacao)
-             defaultLayout [whamlet| 
+             defaultLayout [whamlet|
                  #{alunosAluno_nm alunos}
-            |]
+             |]
