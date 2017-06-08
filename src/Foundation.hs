@@ -81,7 +81,7 @@ mkYesodData "App" $(parseRoutesFile "routes")
 instance Yesod App where
     authRoute _ = Just LogarR
     
-    isAuthorized LogarR _ = ehNada
+    isAuthorized LogarR _ = return Authorized
     
     isAuthorized ProfessorR _ = ehProfessor
     
@@ -100,25 +100,17 @@ instance YesodPersist App where
       
       
 ehProfessor = do
-    mu <- lookupSession ("_USER":: Text)
+    mu <- lookupSession ("_USER" :: Text)
     return $ case mu of
         Nothing -> AuthenticationRequired
         Just "PROFESSOR" -> Authorized
         Just _ -> Unauthorized "<h1>Acesso não permitido!</h1>"
-   
-ehNada = do
-    mu <- lookupSession ("_USER"::Text)
-    return $ case mu of
-        Nothing -> Authorized
-        Just "PROFESSOR" -> Unauthorized
-        Just "ALUNO" -> Unauthorized
 
 ehAluno = do
     mu <- lookupSession ("_USER" :: Text)
     return $ case mu of
         Nothing -> AuthenticationRequired
         Just "ALUNO" -> Authorized
-        --Just _ -> Unauthorized "Soh o Aluno acessa aqui!"
 
 
 type Form a = Html -> MForm Handler (FormResult a, Widget)
