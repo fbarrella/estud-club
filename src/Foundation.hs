@@ -32,8 +32,7 @@ share [mkPersist sqlSettings, mkMigrate "migrateAll"][persistLowerCase|
     Usuarios json
         user_name     Text
         user_pass     Text
-        UniqueUSER_NAME user_name
-        UniqueUSER_PASS user_pass
+        UniqueUsuario user_name user_pass
     
     Professores json
         prof_nm    Text
@@ -74,7 +73,17 @@ staticFiles "static"
 
 mkYesodData "App" $(parseRoutesFile "routes")
 
-instance Yesod App
+instance Yesod App where
+    authRoute _ = Just LogarR
+    isAuthorized LogarR _ = return Authorized
+    
+    isAuthorized ProfessorR _ = ehProfessor
+    
+
+    isAuthorized AlunoR _ = ehAluno
+
+    isAuthorized _ _ = return Authorized
+    
 
 instance YesodPersist App where
    type YesodPersistBackend App = SqlBackend
@@ -83,10 +92,32 @@ instance YesodPersist App where
        let pool = connPool master
        runSqlPool f pool
        
-       
       
       
-ehProfessor = undefined
+ehProfessor = do
+    mu <- lookupSession ("_USER":: Text)
+    return $ case mu of
+        Nothing -> AuthenticationRequired
+        Just "PROFESSOR" -> Authorized
+        Just _ -> Unauthorized "Soh o Professor acessa aqui!"
+        
+
+ehAluno = do
+    mu <- lookupSession ("_USER" :: Text)
+    return $ case mu of
+        Nothing -> AuthenticationRequired
+        Just "ALUNO" -> Authorized
+        Just _ -> Unauthorized "Soh o Aluno acessa aqui!"
 
 
-ehAluno = undefined
+type Form a = Html -> MForm Handler (FormResult a, Widget)
+
+instance RenderMessage App FormMessage where
+    renderMessage _ _ = defaultFormMessage
+
+widgetForm :: Route App -> Enctype -> Widget -> Text -> Widget
+widgetForm x enctype widget y = $(whamletFile "templates/form.hamlet")
+
+
+
+

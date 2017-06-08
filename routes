@@ -2,4 +2,10 @@
 /static                     StaticR         Static getStatic
 
 /login                      LogarR GET POST
-/logout                     DeslogarR GET POST 
+/logout                     DeslogarR POST 
+
+
+/professor                  ProfessorR GET 
+
+
+/aluno                      AlunoR GET

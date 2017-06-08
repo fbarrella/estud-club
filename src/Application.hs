@@ -15,5 +15,7 @@ import Usuario
 
 
 import Handler.Autenticacao
+import Handler.Professor
+import Handler.Aluno
 
 mkYesodDispatch "App" resourcesApp

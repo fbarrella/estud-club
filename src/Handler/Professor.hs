@@ -11,7 +11,7 @@
 {-# LANGUAGE TypeFamilies               #-}
 {-# LANGUAGE DeriveDataTypeable         #-}
 
-module Handler.Autenticacao where
+module Handler.Professor where
 
 import Yesod
 import Yesod.Core
@@ -20,6 +20,16 @@ import Data.Text
 
 
 
+getProfessorR :: Handler Html
+getProfessorR = defaultLayout [whamlet|
+        <h1>
+            Professor
+        Deslogar:
+        <form method=post action=@{DeslogarR}>
+            <input type=submit>
+    |]
+
+{-
 
 formLogin :: Form (Text,Text)
 formLogin = renderDivs $ (,) <$>
@@ -44,20 +54,15 @@ postLogarR = do
                     setMessage "Erro! Usuário não existe"
                     redirect LogarR
                 Just (Entity uid usuario ) -> do
-                    -- setMessage "Autenticado"
-                    alunoOuProfessor <- runDB $ selectFirst [ProfessoresUsuariosid ==. uid ] []
-                    case alunoOuProfessor of
-                        Nothing -> do
-                            setMessage "Aluno Autenticado"
-                            redirect AlunoR 
-                        Just (Entity pid professor ) -> do
-                            setMessage "Professor Autenticado"
-                            redirect ProfessorR
+                    setMessage "Autenticado"
+                    redirect LogarR
         _ -> redirect LogarR
 
 
 
+getDeslogarR :: Handler Html
+getDeslogarR = undefined
+
 postDeslogarR :: Handler Html
-postDeslogarR = do
-    deleteSession "_USER"
-    redirect LogarR
+postDeslogarR = undefined
+-}
