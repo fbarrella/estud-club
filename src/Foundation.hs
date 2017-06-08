@@ -80,7 +80,8 @@ mkYesodData "App" $(parseRoutesFile "routes")
 
 instance Yesod App where
     authRoute _ = Just LogarR
-    isAuthorized LogarR _ = return Authorized
+    
+    isAuthorized LogarR _ = ehNada
     
     isAuthorized ProfessorR _ = ehProfessor
     
@@ -104,7 +105,13 @@ ehProfessor = do
         Nothing -> AuthenticationRequired
         Just "PROFESSOR" -> Authorized
         Just _ -> Unauthorized "<h1>Acesso não permitido!</h1>"
-        
+   
+ehNada = do
+    mu <- lookupSession ("_USER"::Text)
+    return $ case mu of
+        Nothing -> Authorized
+        Just "PROFESSOR" -> Unauthorized
+        Just "ALUNO" -> Unauthorized
 
 ehAluno = do
     mu <- lookupSession ("_USER" :: Text)
