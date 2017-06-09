@@ -64,13 +64,6 @@ share [mkPersist sqlSettings, mkMigrate "migrateAll"][persistLowerCase|
         classeid    ClasseId
         alunosid    AlunosId
         deriving Show
-        
-    --Publi json
-    --    publi_titulo Text
-    --    publi_cont Text
-    --    publi_data Day
-    --    professoresid ProfessoresId
-    --    classeid ClasseId
   
 |]
 

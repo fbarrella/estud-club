@@ -17,37 +17,24 @@ import Yesod
 import Yesod.Core
 import Foundation
 import Data.Text
+
 import Data.Int
 import Database.Persist.Sql
-
-
---getAlunoR :: Handler Html
---getAlunoR = do
---        alunos <- runDB $ get404 (toSqlKey (read $ unpack userIdText) :: AlunosId)
---        defaultLayout [whamlet|
---        <h1>
---            Seja bem vindo, #{alunosAluno_nm alunos}!
---            
---            Você tem #{alunosAluno_nota alunos} e #{alunosAluno_faltas alunos} faltas.
---        Deslogar
---            <form method=post action=@{DeslogarR} >
---                <input type=submit>
---    |]
 
 getAlunoR :: Handler Html
 getAlunoR = do
     maybeUserIdText <- lookupSession "_ID"
     case maybeUserIdText of
         Nothing -> do
-            defaultLayout [whamlet| Sem sessão|]
+            defaultLayout [whamlet| Sem sessão |]
         Just userIdText -> do
             alunos <- runDB $ get404 (toSqlKey (read $ unpack userIdText) :: AlunosId)
             defaultLayout [whamlet|
                <h1>
-                   Seja bem vindo, #{alunosAluno_nm alunos}!
+                   Seja bem vindo, <span .nome>#{alunosAluno_nm alunos}</span>!
             
-               Você tem #{alunosAluno_nota alunos} e #{alunosAluno_faltas alunos} faltas.
+               Sua nota é #{alunosAluno_nota alunos} e você tem #{alunosAluno_faltas alunos} faltas.
 
                <form method=post action=@{DeslogarR}>
-               <input type=submit value="Deslogar">
+                   <input type=submit value="Deslogar">
         |]

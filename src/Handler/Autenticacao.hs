@@ -17,6 +17,7 @@ import Yesod
 import Yesod.Core
 import Foundation
 import Data.Text
+
 import Database.Persist.Sql
 
 
@@ -51,7 +52,10 @@ postCadastraR = do
                        case cadastroLR of
                            Left _ -> redirect CadastraR
                            Right _ -> defaultLayout [whamlet|
-                                          <h1> #{usuariosUser_name cadastro} Inserido com sucesso. 
+                                          <h1> <span .nome>#{usuariosUser_name cadastro}</span> inserido com sucesso.
+                                          
+                                          <form method=post action=@{DeslogarR}>
+                                              <input type=submit value="Voltar">
                                       |]
                     _ -> redirect CadastraR
 
@@ -64,7 +68,7 @@ getLogarR = do
         addStylesheet $ StaticR estilos_css
         $(whamletFile "templates/login.hamlet")
         toWidget [lucius|
-            input { background-color: white; border:none; padding:0; margin:0; height: 20px;}
+            input { background-color: white; border:1px solid black; border-radius: 3px; padding:0; margin:0 auto; height: 30px; text-align: right;}
         |]
         
         
