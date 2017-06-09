@@ -68,7 +68,7 @@ getLogarR = do
         addStylesheet $ StaticR estilos_css
         $(whamletFile "templates/login.hamlet")
         toWidget [lucius|
-            input { background-color: white; border:1px solid black; border-radius: 3px; padding:0; margin:0 auto; height: 30px; text-align: right;}
+            input { background-color: white; border:1px solid black; border-radius: 3px; padding:0; margin:0 auto; height: 30px;}
         |]
         
         
